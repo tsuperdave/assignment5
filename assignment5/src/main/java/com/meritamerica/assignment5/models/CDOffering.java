@@ -4,6 +4,10 @@ public class CDOffering
 {
     protected int term;
     protected double interestRate;
+    
+    CDOffering() {
+    
+    }
 
     CDOffering(int term, double interestRate) {
         this.term = term;
