@@ -5,24 +5,20 @@ public class CDOffering
     protected int term;
     protected double interestRate;
     
-    CDOffering() {
-    
-    }
-
-    CDOffering(int term, double interestRate) {
+    public CDOffering(int term, double interestRate) {
         this.term = term;
         this.interestRate = interestRate;
     }
 
-    int getTerm() {
-        return this.term;
+    public int getTerm() {
+        return term;
     }
 
-    double getInterestRate() {
-        return this.interestRate;
+    public double getInterestRate() {
+        return interestRate;
     }
 
-    static CDOffering readFromString(String cdOfferingDataString) {
+    public static CDOffering readFromString(String cdOfferingDataString) {
 
         int tempTerm;
         double tempIntRate;
@@ -37,7 +33,7 @@ public class CDOffering
         return new CDOffering(tempTerm, tempIntRate);
     }
 
-    String writeToString() {
+    public String writeToString() {
         return this.term + "," + this.interestRate + "\n";
     }
 

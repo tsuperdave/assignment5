@@ -1,7 +1,6 @@
 package com.meritamerica.assignment5.models;
 
 import java.io.*;
-import java.sql.SQLOutput;
 import java.util.*;
 
 public class MeritBank {
@@ -69,13 +68,13 @@ public class MeritBank {
         return listOfCDOffers[indexSecondBiggest];
     }
 
-    static void clearCDOfferings()
-    {
+    static void clearCDOfferings() {
         listOfCDOffers = null;
     }
 
-    static void setCDOfferings(CDOffering[] offerings)
-    {
+    public static void setCDOfferings(CDOffering offering) {
+    	CDOffering[] offerings = Arrays.copyOf(MeritBank.listOfCDOffers, MeritBank.listOfCDOffers.length + 1);
+    	offerings[offerings.length - 1] = offering;
         listOfCDOffers = offerings;
     }
 
@@ -102,13 +101,14 @@ public class MeritBank {
             // System.out.println(nextAccountNumber);
 
             // --- CD OFFERS --- //
-            CDOffering[] newCDarr = new CDOffering[sc.nextInt()];
+            int numOfCDOffers = sc.nextInt();
+            listOfCDOffers = new CDOffering[numOfCDOffers];
             // System.out.println(newCDarr.length);
 
-            for(int i = 0; i < newCDarr.length; i++) {
-                newCDarr[i] = CDOffering.readFromString(sc.next());
+            for(int i = 0; i < numOfCDOffers; i++) {
+                listOfCDOffers[i] = CDOffering.readFromString(sc.next());
             }
-            setCDOfferings(newCDarr);
+            // setCDOfferings(listOfCDOffers);
 
             // --- ACCOUNT HOLDER --- //
             int numOfAHs = Integer.parseInt(sc.next());
