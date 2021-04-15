@@ -31,6 +31,10 @@ public class MeritController {
 	public String test() {
 		return "Welcome to your first Spring app";
 	}
+	
+
+	// ---- CD Offers -----
+	// --------------------
 	// TODO complete
 	@PostMapping(value = "/CDOfferings")
 	@ResponseStatus(HttpStatus.CREATED)
@@ -47,6 +51,9 @@ public class MeritController {
 		CDOffering[] cdOfferings = MeritBank.getCDOfferings();
 		return cdOfferings;
 	}
+	
+	// ---- Accounts -----
+	// -------------------
 	// TODO complete
 	@PostMapping(value = "/AccountHolder")
 	@ResponseStatus(HttpStatus.CREATED)
@@ -67,7 +74,8 @@ public class MeritController {
 		return accountHolder;
 	}
 	
-	// ---- Checking ----
+	// ---- Checking -----
+	// -------------------
 	// TODO posts but repeated TXNs, need to fix
 	@PostMapping(value = "/AccountHolder/{id}/CheckingAccount")
 	@ResponseStatus(HttpStatus.CREATED)
@@ -84,6 +92,7 @@ public class MeritController {
 	}
 	
 	// ----- Savings ------
+	// --------------------
 	// TODO posts but repeated TXNs, need to fix
 	@PostMapping(value = "/AccountHolder/{id}/SavingsAccount")
 	@ResponseStatus(HttpStatus.CREATED)
@@ -100,6 +109,7 @@ public class MeritController {
 	}
 	
 	// ------ CD Accounts ------
+	// -------------------------
 	// TODO posts but repeated TXNs, need to fix
 	@PostMapping(value = "/AccountHolder/{id}/CDAccount")
 	@ResponseStatus(HttpStatus.CREATED)
