@@ -1,13 +1,20 @@
 package com.meritamerica.assignment5.models;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class AccountHolder implements Comparable<AccountHolder> {
 	
     private static final double BALANCE_LIMIT = 250000;
     final double FRAUD_THRESHOLD = 1000;
+    @NotBlank(message = "First name cannot be empty")
     private String firstName;
     private String middleName;
+    @NotBlank(message = "Last name cannot be empty")
     private String lastName;
+    @NotBlank(message = "SSN cannot be empty")
     private String ssn;
+    
     private CheckingAccount[] checkingAccountList = new CheckingAccount[0];
     private SavingsAccount[] savingsAccountList = new SavingsAccount[0];
     private CDAccount[] cdAccountList = new CDAccount[0];

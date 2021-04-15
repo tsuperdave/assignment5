@@ -39,10 +39,10 @@ public class MeritController {
 		CDOffering[] cdOfferings = MeritBank.getCDOfferings();
 		return cdOfferings;
 	}
-	// TODO got Postman to show data, need to add @Valid checks
+	// TODO complete
 	@PostMapping(value = "/AccountHolder")
 	@ResponseStatus(HttpStatus.CREATED)
-	public AccountHolder addAccountHolder(@RequestBody AccountHolder accountHolder) {
+	public AccountHolder addAccountHolder(@RequestBody @Valid AccountHolder accountHolder) {
 		MeritBank.addAccountHolder(accountHolder);
 		return accountHolder;
 	}
