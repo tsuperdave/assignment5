@@ -1,12 +1,14 @@
 package com.meritamerica.assignment5.models;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 public class AccountHolder implements Comparable<AccountHolder> {
 	
     private static final double BALANCE_LIMIT = 250000;
     final double FRAUD_THRESHOLD = 1000;
+    private static long ID = 1;
+    
+    private long id;
     @NotBlank(message = "First name cannot be empty")
     private String firstName;
     private String middleName;
@@ -20,6 +22,8 @@ public class AccountHolder implements Comparable<AccountHolder> {
     private CDAccount[] cdAccountList = new CDAccount[0];
 
     AccountHolder() { 	
+    	this.id = AccountHolder.ID;
+    	AccountHolder.ID++;
         this.checkingAccountList = new CheckingAccount[0];
         this.savingsAccountList = new SavingsAccount[0];
         this.cdAccountList = new CDAccount[0];
@@ -64,6 +68,14 @@ public class AccountHolder implements Comparable<AccountHolder> {
         this.ssn = ssn;
     }
 
+    public long getId() {
+    	return id;
+    }
+    
+    public void setId(long id) {
+    	this.id = id;
+    }
+    
     /* CHECKING ACCOUNT */
     public CheckingAccount addCheckingAccount(double openingBalance) throws ExceedsCombinedBalanceLimitException, ExceedsFraudSuspicionLimitException {
         return this.addCheckingAccount(new CheckingAccount(openingBalance));

@@ -20,13 +20,19 @@ public class MeritBank {
         accountHolderCount++;
     }
 
-    public static AccountHolder[] getAccountHolders()
-    {
+    public static AccountHolder[] getAccountHolders() {
         return listOfAccountHolders;
     }
+    
+    public static AccountHolder getAccountHolder(long id) {
+    	for(AccountHolder account: MeritBank.listOfAccountHolders) {
+    		if(account == null) return null;
+    		if(account.getId() == id) return account;
+    	}
+    	return null;
+    }
 
-    public static CDOffering[] getCDOfferings()
-    {
+    public static CDOffering[] getCDOfferings() {
         return listOfCDOffers;
     }
 
