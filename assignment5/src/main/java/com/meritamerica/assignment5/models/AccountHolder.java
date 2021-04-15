@@ -12,62 +12,57 @@ public class AccountHolder implements Comparable<AccountHolder> {
     private SavingsAccount[] savingsAccountList = new SavingsAccount[0];
     private CDAccount[] cdAccountList = new CDAccount[0];
 
-    AccountHolder() {
-    }
-
-    AccountHolder(
-            String firstName,
-            String middleName,
-            String lastName,
-            String ssn
-    ) {
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.ssn = ssn;
+    AccountHolder() { 	
         this.checkingAccountList = new CheckingAccount[0];
         this.savingsAccountList = new SavingsAccount[0];
         this.cdAccountList = new CDAccount[0];
     }
 
-    String getFirstName() {
+    AccountHolder(String firstName, String middleName, String lastName, String ssn) {
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.ssn = ssn;       
+    }
+
+    public String getFirstName() {
         return firstName;
     }
 
-    void setFirstName(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    String getMiddleName() {
+    public String getMiddleName() {
         return middleName;
     }
 
-    void setMiddleName(String middleName) {
+    public void setMiddleName(String middleName) {
         this.middleName = middleName;
     }
 
-    String getLastName() {
+    public String getLastName() {
         return this.lastName;
     }
 
-    void setLastName(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    String getSSN() {
-        return this.ssn;
+    public String getSSN() {
+        return ssn;
     }
 
-    void setSSN(String ssn) {
+    public void setSSN(String ssn) {
         this.ssn = ssn;
     }
 
     /* CHECKING ACCOUNT */
-    CheckingAccount addCheckingAccount(double openingBalance) throws ExceedsCombinedBalanceLimitException, ExceedsFraudSuspicionLimitException {
+    public CheckingAccount addCheckingAccount(double openingBalance) throws ExceedsCombinedBalanceLimitException, ExceedsFraudSuspicionLimitException {
         return this.addCheckingAccount(new CheckingAccount(openingBalance));
     }
 
-    CheckingAccount addCheckingAccount(CheckingAccount checkingAccount) throws ExceedsCombinedBalanceLimitException, ExceedsFraudSuspicionLimitException {
+    public CheckingAccount addCheckingAccount(CheckingAccount checkingAccount) throws ExceedsCombinedBalanceLimitException, ExceedsFraudSuspicionLimitException {
         if ((this.getCheckingBalance() + (this.getCombinedBalance() - this.getCDBalance()) >= BALANCE_LIMIT)) {
             throw new ExceedsCombinedBalanceLimitException("Balance exceeds limit. Unable to open new account at this time");
         } else if(checkingAccount.getBalance() > FRAUD_THRESHOLD) {
@@ -84,11 +79,11 @@ public class AccountHolder implements Comparable<AccountHolder> {
         return checkingAccount;
     }
 
-    CheckingAccount[] getCheckingAccounts() {
+    public CheckingAccount[] getCheckingAccounts() {
         return checkingAccountList;
     }
 
-    int getNumberOfCheckingAccounts() {
+    public int getNumberOfCheckingAccounts() {
         int numOfAccounts = 0;
         for(CheckingAccount i: checkingAccountList) {
             if(i != null) {
@@ -98,7 +93,7 @@ public class AccountHolder implements Comparable<AccountHolder> {
         return numOfAccounts;
     }
 
-    double getCheckingBalance() {
+    public double getCheckingBalance() {
         double sum = 0;
         for(CheckingAccount chkAcct: this.checkingAccountList) {
             sum += chkAcct.balance;
@@ -108,11 +103,11 @@ public class AccountHolder implements Comparable<AccountHolder> {
     }
 
     /* SAVINGS ACCOUNT */
-    SavingsAccount addSavingsAccount(double openingBalance) throws ExceedsCombinedBalanceLimitException, ExceedsFraudSuspicionLimitException {
+    public SavingsAccount addSavingsAccount(double openingBalance) throws ExceedsCombinedBalanceLimitException, ExceedsFraudSuspicionLimitException {
         return this.addSavingsAccount(new SavingsAccount(openingBalance));
     }
 
-    SavingsAccount addSavingsAccount(SavingsAccount savingsAccount) throws ExceedsCombinedBalanceLimitException, ExceedsFraudSuspicionLimitException {
+    public SavingsAccount addSavingsAccount(SavingsAccount savingsAccount) throws ExceedsCombinedBalanceLimitException, ExceedsFraudSuspicionLimitException {
         if (this.getSavingsBalance() + (this.getCombinedBalance() - this.getCDBalance()) >= BALANCE_LIMIT) {
             throw new ExceedsCombinedBalanceLimitException("Balance exceeds limit. Unable to open new account at this time");
         } else if(savingsAccount.getBalance() > FRAUD_THRESHOLD){
@@ -129,11 +124,11 @@ public class AccountHolder implements Comparable<AccountHolder> {
 
     }
 
-    SavingsAccount[] getSavingsAccounts() {
+    public SavingsAccount[] getSavingsAccounts() {
         return savingsAccountList;
     }
 
-    int getNumberOfSavingsAccounts() {
+    public int getNumberOfSavingsAccounts() {
         int numOfAccounts = 0;
         for(SavingsAccount i: savingsAccountList)
         {
@@ -145,7 +140,7 @@ public class AccountHolder implements Comparable<AccountHolder> {
         return numOfAccounts;
     }
 
-    double getSavingsBalance() {
+    public double getSavingsBalance() {
         double sum = 0;
         for(SavingsAccount savAcct: savingsAccountList) {
             sum += savAcct.balance;
@@ -154,7 +149,7 @@ public class AccountHolder implements Comparable<AccountHolder> {
     }
 
     /* CD ACCOUNT */
-    CDAccount addCDAccount(CDOffering offering, double openingBalance) throws ExceedsFraudSuspicionLimitException, NegativeAmountException {
+    public CDAccount addCDAccount(CDOffering offering, double openingBalance) throws ExceedsFraudSuspicionLimitException, NegativeAmountException {
         if(offering == null) return null;
 
         CDAccount newCDAccount = new CDAccount(offering, openingBalance);
@@ -180,7 +175,7 @@ public class AccountHolder implements Comparable<AccountHolder> {
         return newCDAccount;
     }
 
-    CDAccount addCDAccount(CDAccount cdAccount) throws ExceedsFraudSuspicionLimitException, NegativeAmountException {
+    public CDAccount addCDAccount(CDAccount cdAccount) throws ExceedsFraudSuspicionLimitException, NegativeAmountException {
 
         DepositTransaction transaction = new DepositTransaction(cdAccount, cdAccount.getBalance());
 
@@ -204,11 +199,11 @@ public class AccountHolder implements Comparable<AccountHolder> {
         return cdAccount;
     }
 
-    CDAccount[] getCDAccounts() {
+    public CDAccount[] getCDAccounts() {
         return cdAccountList;
     }
 
-    int getNumberOfCDAccounts() {
+    public int getNumberOfCDAccounts() {
         int numOfAccounts = 0;
         for(CDAccount i: cdAccountList)
         {
@@ -220,7 +215,7 @@ public class AccountHolder implements Comparable<AccountHolder> {
         return numOfAccounts;
     }
 
-    double getCDBalance() {
+    public double getCDBalance() {
         double sum = 0;
         for(CDAccount cdAcct: cdAccountList) {
             sum += cdAcct.balance;
@@ -228,7 +223,7 @@ public class AccountHolder implements Comparable<AccountHolder> {
         return sum;
     }
 
-    static AccountHolder readFromString(String accountHolderData) {
+    public static AccountHolder readFromString(String accountHolderData) {
         String[] tempArr = accountHolderData.split(",");
         String tempFirstName = "", tempMidName = "", TempLastName = "", tempSSN = "";
 
@@ -242,7 +237,7 @@ public class AccountHolder implements Comparable<AccountHolder> {
 
     // TODO -- fix file writer (txn's)
     // may need to swap loops to for i loops
-    String writeToString() {
+    public String writeToString() {
         StringBuilder sb = new StringBuilder(this.lastName).append(",").append(this.middleName).append(",").append(this.firstName).append(",").append(this.ssn).append(System.lineSeparator());
         sb.append(this.getNumberOfCheckingAccounts()).append(System.lineSeparator());
 
@@ -269,7 +264,7 @@ public class AccountHolder implements Comparable<AccountHolder> {
         return sb.toString();
     }
 
-    double getCombinedBalance() {
+    public double getCombinedBalance() {
         return this.getCheckingBalance() + this.getSavingsBalance() + this.getCDBalance();
     }
 

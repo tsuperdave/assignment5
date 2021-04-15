@@ -10,7 +10,7 @@ public class MeritBank {
     private static long nextAccountNumber = 1L;
     static int accountHolderCount = 0;
 
-    static void addAccountHolder(AccountHolder accountHolder) {
+    public static void addAccountHolder(AccountHolder accountHolder) {
         AccountHolder[] tempArr = new AccountHolder[listOfAccountHolders.length +1];
         for(int i = 0; i < listOfAccountHolders.length; i++) {
             tempArr[i] = listOfAccountHolders[i];
@@ -20,7 +20,7 @@ public class MeritBank {
         accountHolderCount++;
     }
 
-    static AccountHolder[] getAccountHolders()
+    public static AccountHolder[] getAccountHolders()
     {
         return listOfAccountHolders;
     }
@@ -30,7 +30,7 @@ public class MeritBank {
         return listOfCDOffers;
     }
 
-    static CDOffering getBestCDOffering(double depositAmount) {
+    public static CDOffering getBestCDOffering(double depositAmount) {
         if(listOfCDOffers == null) return null;
         double stored = recursiveFutureValue(depositAmount, listOfCDOffers[0].getInterestRate(), listOfCDOffers[0].getTerm());
         int indexBiggest = 0;
@@ -46,7 +46,7 @@ public class MeritBank {
         return listOfCDOffers[indexBiggest];
     }
 
-    static CDOffering getSecondBestCDOffering(double depositAmount) {
+    public static CDOffering getSecondBestCDOffering(double depositAmount) {
         if(listOfCDOffers == null) return null;
         double biggest = recursiveFutureValue(depositAmount, listOfCDOffers[0].getInterestRate(), listOfCDOffers[0].getTerm());
         double secondBiggest = recursiveFutureValue(depositAmount, listOfCDOffers[0].getInterestRate(), listOfCDOffers[0].getTerm());
@@ -68,7 +68,7 @@ public class MeritBank {
         return listOfCDOffers[indexSecondBiggest];
     }
 
-    static void clearCDOfferings() {
+    public static void clearCDOfferings() {
         listOfCDOffers = null;
     }
 
@@ -78,12 +78,12 @@ public class MeritBank {
         listOfCDOffers = offerings;
     }
 
-    static long getNextAccountNumber()
+    public static long getNextAccountNumber()
     {
         return nextAccountNumber++;
     }
 
-    static double totalBalances() {
+    public static double totalBalances() {
         double total = 0;
         for(AccountHolder ah: listOfAccountHolders) {
             total += ah.getCombinedBalance();
@@ -91,7 +91,7 @@ public class MeritBank {
         return total;
     }
 
-    static boolean readFromFile(String fileName) {
+    public static boolean readFromFile(String fileName) {
         Set<String> transactions = new HashSet<String>();
         AccountHolder[] accountHolders = new AccountHolder[0];
 
@@ -199,7 +199,7 @@ public class MeritBank {
 
     }
 
-    static boolean writeToFile(String fileName) {
+    public static boolean writeToFile(String fileName) {
         StringBuilder fileWriteStr = new StringBuilder();
         fileWriteStr.append("Next Account Number:").append(System.lineSeparator());
         fileWriteStr.append(nextAccountNumber).append(System.lineSeparator());
@@ -220,7 +220,7 @@ public class MeritBank {
         return true;
     }
 
-    static AccountHolder[] sortAccountHolders() {
+    public static AccountHolder[] sortAccountHolders() {
         Arrays.sort(listOfAccountHolders);
 
         for(int i = 0; i < listOfAccountHolders.length; i++) {
@@ -239,7 +239,7 @@ public class MeritBank {
         MeritBank.nextAccountNumber = nextAccountNumber;
     }
 
-    static double futureValue(double presentValue, double interestRate, int term) {
+    public static double futureValue(double presentValue, double interestRate, int term) {
         return recursiveFutureValue(presentValue,term,interestRate);
     }
 
