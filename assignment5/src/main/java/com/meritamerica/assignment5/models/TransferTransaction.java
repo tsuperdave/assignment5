@@ -20,7 +20,7 @@ public class TransferTransaction extends Transaction {
         this.sourceAcct.withdraw(this.amount);
         this.targetAcct.deposit(this.amount);
 
-        this.sourceAcct.addTransaction(this);
-        this.targetAcct.addTransaction(this);
+        //this.sourceAcct.addTransaction(this);
+        //this.targetAcct.addTransaction(this);
     }
 }

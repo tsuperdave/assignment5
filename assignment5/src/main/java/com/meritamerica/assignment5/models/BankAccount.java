@@ -3,13 +3,23 @@ package com.meritamerica.assignment5.models;
 import java.text.*;
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(value = { "transactions" })
 public abstract class BankAccount {
 
-    List<Transaction> listOfTransactions = new ArrayList<Transaction>();
+    private List<Transaction> listOfTransactions = new ArrayList<Transaction>();
     Date accountOpenedOn;
+    protected Date openDate;
     protected long accountNumber;
     protected double balance;
     protected double interestRate;
+    
+    BankAccount() {
+    	this.listOfTransactions = new ArrayList<>();
+    	this.openDate = new Date();
+    	this.accountNumber = MeritBank.getNextAccountNumber();
+    }
 
     BankAccount(double balance, double interestRate) {
         this(MeritBank.getNextAccountNumber(), balance, interestRate, new Date());
@@ -38,8 +48,7 @@ public abstract class BankAccount {
         return interestRate;
     }
 
-    Date getOpenedOn()
-    {
+    Date getOpenedOn() {
         return this.accountOpenedOn;
     }
 
@@ -71,19 +80,19 @@ public abstract class BankAccount {
         return listOfTransactions;
     }
     
-    /*
-    public static BankAccount readFromString(String accountData) throws ParseException {
-        String[] data = accountData.split(",");
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        int tempAcctNum = Integer.parseInt(data[0]);
-        double tampBal = Double.parseDouble(data[1]);
-        double tempIntRate = Double.parseDouble(data[2]);
-        Date tempOpenDate = formatter.parse(data[3]);
-
-        return new BankAccount(tempAcctNum, tampBal, tempIntRate, tempOpenDate);
-    }
-    */
+    
+//    public static BankAccount readFromString(String accountData) throws ParseException {
+//        String[] data = accountData.split(",");
+//
+//        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+//        int tempAcctNum = Integer.parseInt(data[0]);
+//        double tampBal = Double.parseDouble(data[1]);
+//        double tempIntRate = Double.parseDouble(data[2]);
+//        Date tempOpenDate = formatter.parse(data[3]);
+//
+//        return new BankAccount(tempAcctNum, tampBal, tempIntRate, tempOpenDate);
+//    }
+    
 
     String writeToString() {
         String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(this.accountOpenedOn);

@@ -2,6 +2,8 @@ package com.meritamerica.assignment5.controllers;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,12 +29,13 @@ import com.meritamerica.assignment5.models.SavingsAccount;
 @RestController
 public class MeritController {
 	
+	Logger logs = LoggerFactory.getLogger(MeritController.class);
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String test() {
 		return "Welcome to your first Spring app";
 	}
 	
-
 	// ---- CD Offers -----
 	// --------------------
 	// TODO complete
@@ -70,7 +73,10 @@ public class MeritController {
 	@GetMapping(value = "/AccountHolder/{id}")
 	public AccountHolder getAccountHolderById(@PathVariable("id") long id) throws NotFoundException {
 		AccountHolder accountHolder = MeritBank.getAccountHolder(id);
-		if(accountHolder == null) throw new NotFoundException("Account Not Found");
+		if(accountHolder == null) { 
+			logs.warn("No account exists"); 
+			throw new NotFoundException("Account Not Found"); 
+		}
 		return accountHolder;
 	}
 	

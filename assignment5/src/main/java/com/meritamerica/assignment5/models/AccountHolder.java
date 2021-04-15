@@ -99,7 +99,7 @@ public class AccountHolder implements Comparable<AccountHolder> {
     }
 
     public CheckingAccount[] getCheckingAccounts() {
-        return checkingAccountList;
+        return this.checkingAccountList;
     }
 
     public int getNumberOfCheckingAccounts() {
@@ -133,7 +133,7 @@ public class AccountHolder implements Comparable<AccountHolder> {
             throw new ExceedsFraudSuspicionLimitException("Possible fraud detected. Transaction is being sent to fraud detection services for review");
         }
 
-        savingsAccount.addTransaction(new DepositTransaction(savingsAccount, savingsAccount.getBalance()));
+        // savingsAccount.addTransaction(new DepositTransaction(savingsAccount, savingsAccount.getBalance()));
 
         SavingsAccount[] tempArr = new SavingsAccount[this.savingsAccountList.length + 1];
         System.arraycopy(this.savingsAccountList, 0, tempArr, 0, this.savingsAccountList.length);
@@ -256,32 +256,32 @@ public class AccountHolder implements Comparable<AccountHolder> {
 
     // TODO -- fix file writer (txn's)
     // may need to swap loops to for i loops
-    public String writeToString() {
-        StringBuilder sb = new StringBuilder(this.lastName).append(",").append(this.middleName).append(",").append(this.firstName).append(",").append(this.ssn).append(System.lineSeparator());
-        sb.append(this.getNumberOfCheckingAccounts()).append(System.lineSeparator());
-
-        for(CheckingAccount chk: this.checkingAccountList){
-            sb.append(chk.writeToString()).append(System.lineSeparator());
-            sb.append(chk.getTransactions().size()).append(System.lineSeparator());
-            for(Transaction txn: chk.getTransactions()) sb.append(txn.writeToString()).append(System.lineSeparator());
-        }
-
-        sb.append(this.getNumberOfSavingsAccounts()).append(System.lineSeparator());
-        for(SavingsAccount sav: this.savingsAccountList){
-            sb.append(sav.getTransactions()).append(System.lineSeparator());
-            sb.append(sav.writeToString()).append(System.lineSeparator());
-            for(Transaction txn: sav.getTransactions()) sb.append(txn.writeToString()).append(System.lineSeparator());
-        }
-
-        sb.append(this.getNumberOfCDAccounts()).append(System.lineSeparator());
-        for(CDAccount cd: this.cdAccountList){
-            sb.append(cd.getTransactions()).append(System.lineSeparator());
-            sb.append(cd.writeToString()).append(System.lineSeparator());
-            for(Transaction txn: cd.getTransactions()) sb.append(txn.writeToString()).append(System.lineSeparator());
-        }
-
-        return sb.toString();
-    }
+//    public String writeToString() {
+//        StringBuilder sb = new StringBuilder(this.lastName).append(",").append(this.middleName).append(",").append(this.firstName).append(",").append(this.ssn).append(System.lineSeparator());
+//        sb.append(this.getNumberOfCheckingAccounts()).append(System.lineSeparator());
+//
+//        for(CheckingAccount chk: this.checkingAccountList){
+//            sb.append(chk.writeToString()).append(System.lineSeparator());
+//            sb.append(chk.getTransactions().size()).append(System.lineSeparator());
+//            for(Transaction txn: chk.getTransactions()) sb.append(txn.writeToString()).append(System.lineSeparator());
+//        }
+//
+//        sb.append(this.getNumberOfSavingsAccounts()).append(System.lineSeparator());
+//        for(SavingsAccount sav: this.savingsAccountList){
+//            sb.append(sav.getTransactions()).append(System.lineSeparator());
+//            sb.append(sav.writeToString()).append(System.lineSeparator());
+//            for(Transaction txn: sav.getTransactions()) sb.append(txn.writeToString()).append(System.lineSeparator());
+//        }
+//
+//        sb.append(this.getNumberOfCDAccounts()).append(System.lineSeparator());
+//        for(CDAccount cd: this.cdAccountList){
+//            sb.append(cd.getTransactions()).append(System.lineSeparator());
+//            sb.append(cd.writeToString()).append(System.lineSeparator());
+//            for(Transaction txn: cd.getTransactions()) sb.append(txn.writeToString()).append(System.lineSeparator());
+//        }
+//
+//        return sb.toString();
+//    }
 
     public double getCombinedBalance() {
         return this.getCheckingBalance() + this.getSavingsBalance() + this.getCDBalance();

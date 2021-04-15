@@ -186,16 +186,16 @@ public class MeritBank {
             }
 
             // System.out.println(transactions.size());
-            for(String txn: transactions) {
-                Transaction newTxn = Transaction.readFromString(txn);
-                if(newTxn.getSourceAccount() == null) {
-                    newTxn.getTargetAccount().addTransaction(newTxn);
-                }
-                else {
-                    newTxn.getTargetAccount().addTransaction(newTxn);
-                    newTxn.getSourceAccount().addTransaction(newTxn);
-                }
-            }
+//            for(String txn: transactions) {
+//                Transaction newTxn = Transaction.readFromString(txn);
+//                if(newTxn.getSourceAccount() == null) {
+//                    newTxn.getTargetAccount().addTransaction(newTxn);
+//                }
+//                else {
+//                    newTxn.getTargetAccount().addTransaction(newTxn);
+//                    newTxn.getSourceAccount().addTransaction(newTxn);
+//                }
+//            }
             return true;
 
         }catch(Exception e) {
@@ -216,7 +216,7 @@ public class MeritBank {
 
         fileWriteStr.append("Number of Accounts:").append(System.lineSeparator());
         fileWriteStr.append(listOfAccountHolders.length).append(System.lineSeparator());
-        for(AccountHolder ah: listOfAccountHolders) fileWriteStr.append(ah.writeToString());
+       // for(AccountHolder ah: listOfAccountHolders) fileWriteStr.append(ah.writeToString());
 
         try(FileWriter fr = new FileWriter(fileName)) {
                 fr.write(fileWriteStr.toString());

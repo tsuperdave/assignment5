@@ -6,11 +6,11 @@ import java.util.*;
 public class CheckingAccount extends BankAccount {
 	
     private static final double INTEREST_RATE = 0.0001;
-
+   
     CheckingAccount(double openingBalance) {
-        super(openingBalance, INTEREST_RATE, new java.util.Date());
+        super(openingBalance, INTEREST_RATE);
     }
-
+    
     CheckingAccount(long accountNumber, double balance, double interestRate, Date accountOpenedOn) {
         super(accountNumber, balance, interestRate, accountOpenedOn);
     }
