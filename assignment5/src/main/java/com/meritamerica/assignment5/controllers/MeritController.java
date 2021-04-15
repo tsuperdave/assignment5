@@ -16,6 +16,9 @@ import com.meritamerica.assignment5.exceptions.MissingFieldException;
 import com.meritamerica.assignment5.exceptions.NotFoundException;
 import com.meritamerica.assignment5.models.AccountHolder;
 import com.meritamerica.assignment5.models.CDOffering;
+import com.meritamerica.assignment5.models.CheckingAccount;
+import com.meritamerica.assignment5.models.ExceedsCombinedBalanceLimitException;
+import com.meritamerica.assignment5.models.ExceedsFraudSuspicionLimitException;
 import com.meritamerica.assignment5.models.MeritBank;
 
 @RestController
@@ -50,14 +53,28 @@ public class MeritController {
 	}
 	// TODO complete
 	@GetMapping(value = "/AccountHolder")
-	public AccountHolder[] geListOftAccountHolders() {
+	public AccountHolder[] getListOfAccountHolders() {
 		return MeritBank.getAccountHolders();
 	}
-	// TODO need to add way to get by id
+	// TODO complete
 	@GetMapping(value = "/AccountHolder/{id}")
 	public AccountHolder getAccountHolderById(@PathVariable("id") long id) throws NotFoundException {
 		AccountHolder accountHolder = MeritBank.getAccountHolder(id);
 		if(accountHolder == null) throw new NotFoundException("Account Not Found");
 		return accountHolder;
+	}
+	// TODO posts but repeated TXNs, need to fix
+	@PostMapping(value = "/AccountHolder/{id}/CheckingAccount")
+	@ResponseStatus(HttpStatus.CREATED)
+	public CheckingAccount addCheckingToAccountHolder(@PathVariable("id") long id, @RequestBody CheckingAccount checkingAccount) throws NotFoundException, ExceedsCombinedBalanceLimitException, ExceedsFraudSuspicionLimitException {
+		AccountHolder ah = this.getAccountHolderById(id);
+		ah.addCheckingAccount(checkingAccount);
+		return checkingAccount;
+	}
+	// TODO work on getting checkaccounts
+	@GetMapping(value = "/AccountHolder/{id}/CheckingAccount")
+	public CheckingAccount[] getAccountHolderCheckingAccounts(@PathVariable("id") long id) throws NotFoundException {
+		AccountHolder ah = this.getAccountHolderById(id);
+		return ah.getCheckingAccounts();
 	}
 }

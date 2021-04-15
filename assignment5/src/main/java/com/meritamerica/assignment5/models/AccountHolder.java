@@ -88,7 +88,7 @@ public class AccountHolder implements Comparable<AccountHolder> {
             throw new ExceedsFraudSuspicionLimitException("Possible fraud detected. Transaction is being sent to fraud detection services for review");
         }
 
-        checkingAccount.addTransaction(new DepositTransaction(checkingAccount, checkingAccount.getBalance()));
+        // checkingAccount.addTransaction(new DepositTransaction(checkingAccount, checkingAccount.getBalance()));
 
         CheckingAccount[] tempArr = new CheckingAccount[this.checkingAccountList.length + 1];
         System.arraycopy(this.checkingAccountList, 0, tempArr, 0, this.checkingAccountList.length);
