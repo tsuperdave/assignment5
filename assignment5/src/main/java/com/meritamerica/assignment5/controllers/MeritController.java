@@ -15,11 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.meritamerica.assignment5.exceptions.MissingFieldException;
 import com.meritamerica.assignment5.exceptions.NotFoundException;
 import com.meritamerica.assignment5.models.AccountHolder;
+import com.meritamerica.assignment5.models.CDAccount;
 import com.meritamerica.assignment5.models.CDOffering;
 import com.meritamerica.assignment5.models.CheckingAccount;
 import com.meritamerica.assignment5.models.ExceedsCombinedBalanceLimitException;
 import com.meritamerica.assignment5.models.ExceedsFraudSuspicionLimitException;
 import com.meritamerica.assignment5.models.MeritBank;
+import com.meritamerica.assignment5.models.NegativeAmountException;
+import com.meritamerica.assignment5.models.SavingsAccount;
 
 @RestController
 public class MeritController {
@@ -63,6 +66,8 @@ public class MeritController {
 		if(accountHolder == null) throw new NotFoundException("Account Not Found");
 		return accountHolder;
 	}
+	
+	// ---- Checking ----
 	// TODO posts but repeated TXNs, need to fix
 	@PostMapping(value = "/AccountHolder/{id}/CheckingAccount")
 	@ResponseStatus(HttpStatus.CREATED)
@@ -71,10 +76,43 @@ public class MeritController {
 		ah.addCheckingAccount(checkingAccount);
 		return checkingAccount;
 	}
-	// TODO work on getting checkaccounts
+	// TODO work on getting checking accounts
 	@GetMapping(value = "/AccountHolder/{id}/CheckingAccount")
 	public CheckingAccount[] getAccountHolderCheckingAccounts(@PathVariable("id") long id) throws NotFoundException {
 		AccountHolder ah = this.getAccountHolderById(id);
 		return ah.getCheckingAccounts();
 	}
+	
+	// ----- Savings ------
+	// TODO posts but repeated TXNs, need to fix
+	@PostMapping(value = "/AccountHolder/{id}/SavingsAccount")
+	@ResponseStatus(HttpStatus.CREATED)
+	public SavingsAccount addSavingsToAccountHolder(@PathVariable("id") long id, @RequestBody SavingsAccount savingsAccount) throws NotFoundException, ExceedsCombinedBalanceLimitException, ExceedsFraudSuspicionLimitException {
+		AccountHolder ah = this.getAccountHolderById(id);
+		ah.addSavingsAccount(savingsAccount);
+		return savingsAccount;
+	}
+	// TODO work on getting savings accounts
+	@GetMapping(value = "/AccountHolder/{id}/SavingsAccount")
+	public SavingsAccount[] getAccountHolderSavingsAccounts(@PathVariable("id") long id) throws NotFoundException {
+		AccountHolder ah = this.getAccountHolderById(id);
+		return ah.getSavingsAccounts();
+	}
+	
+	// ------ CD Accounts ------
+	// TODO posts but repeated TXNs, need to fix
+	@PostMapping(value = "/AccountHolder/{id}/CDAccount")
+	@ResponseStatus(HttpStatus.CREATED)
+	public CDAccount addCDToAccountHolder(@PathVariable("id") long id, @RequestBody CDAccount cdAccount) throws NotFoundException, ExceedsCombinedBalanceLimitException, ExceedsFraudSuspicionLimitException, NegativeAmountException {
+		AccountHolder ah = this.getAccountHolderById(id);
+		ah.addCDAccount(cdAccount);
+		return cdAccount;
+	}
+	// TODO work on getting savings accounts
+	@GetMapping(value = "/AccountHolder/{id}/CDAccount")
+	public CDAccount[] getAccountHolderCDAccounts(@PathVariable("id") long id) throws NotFoundException {
+		AccountHolder ah = this.getAccountHolderById(id);
+		return ah.getCDAccounts();
+	}
+	
 }
