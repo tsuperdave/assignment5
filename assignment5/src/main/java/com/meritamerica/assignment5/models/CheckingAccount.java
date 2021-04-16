@@ -6,9 +6,17 @@ import java.util.*;
 public class CheckingAccount extends BankAccount {
 	
     private static final double INTEREST_RATE = 0.0001;
+    
+    CheckingAccount() {
+    	super(0, INTEREST_RATE);
+    }
    
     CheckingAccount(double balance) {
-        super(balance, INTEREST_RATE);
+        super(MeritBank.getNextAccountNumber(), balance, INTEREST_RATE, new Date());
+    }
+    
+    CheckingAccount(double balance, double interestRate) {
+    	super(balance, interestRate);
     }
     
     CheckingAccount(long accountNumber, double balance, double interestRate, Date accountOpenedOn) {

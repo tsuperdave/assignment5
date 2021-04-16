@@ -82,7 +82,7 @@ public class MeritController {
 	
 	// ---- Checking -----
 	// -------------------
-	// TODO posts but repeated TXNs, need to fix
+	// TODO complete
 	@PostMapping(value = "/AccountHolder/{id}/CheckingAccount")
 	@ResponseStatus(HttpStatus.CREATED)
 	public CheckingAccount addCheckingToAccountHolder(@PathVariable("id") long id, @RequestBody CheckingAccount checkingAccount) throws NotFoundException, ExceedsCombinedBalanceLimitException, ExceedsFraudSuspicionLimitException {
@@ -90,7 +90,7 @@ public class MeritController {
 		ah.addCheckingAccount(checkingAccount);
 		return checkingAccount;
 	}
-	// TODO work on getting checking accounts
+	// TODO complete
 	@GetMapping(value = "/AccountHolder/{id}/CheckingAccount")
 	public CheckingAccount[] getAccountHolderCheckingAccounts(@PathVariable("id") long id) throws NotFoundException {
 		AccountHolder ah = this.getAccountHolderById(id);
@@ -99,7 +99,7 @@ public class MeritController {
 	
 	// ----- Savings ------
 	// --------------------
-	// TODO posts but repeated TXNs, need to fix
+	// TODO complete
 	@PostMapping(value = "/AccountHolder/{id}/SavingsAccount")
 	@ResponseStatus(HttpStatus.CREATED)
 	public SavingsAccount addSavingsToAccountHolder(@PathVariable("id") long id, @RequestBody SavingsAccount savingsAccount) throws NotFoundException, ExceedsCombinedBalanceLimitException, ExceedsFraudSuspicionLimitException {
@@ -107,7 +107,7 @@ public class MeritController {
 		ah.addSavingsAccount(savingsAccount);
 		return savingsAccount;
 	}
-	// TODO work on getting savings accounts
+	// TODO complete
 	@GetMapping(value = "/AccountHolder/{id}/SavingsAccount")
 	public SavingsAccount[] getAccountHolderSavingsAccounts(@PathVariable("id") long id) throws NotFoundException {
 		AccountHolder ah = this.getAccountHolderById(id);

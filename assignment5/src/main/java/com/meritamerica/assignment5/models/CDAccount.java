@@ -23,11 +23,11 @@ public class CDAccount extends BankAccount {
         this.accountOpenedOn = accountOpenedOn;
     }
 
-    double getInterestRate() {
+    public double getInterestRate() {
         return super.interestRate;
     }
 
-    long getAccountNumber() {
+    public long getAccountNumber() {
         return super.accountNumber;
     }
 

@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 
 public class MeritBank {
+	
     private static CDOffering[] listOfCDOffers = new CDOffering[0];
     private static AccountHolder[] listOfAccountHolders = new AccountHolder[0];
     static FraudQueue fraudQueue = new FraudQueue();
