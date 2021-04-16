@@ -99,7 +99,7 @@ public class AccountHolder implements Comparable<AccountHolder> {
     }
 
     public CheckingAccount[] getCheckingAccounts() {
-        return this.checkingAccountList;
+        return checkingAccountList;
     }
 
     public int getNumberOfCheckingAccounts() {

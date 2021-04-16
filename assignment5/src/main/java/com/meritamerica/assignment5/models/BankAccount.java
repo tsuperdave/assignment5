@@ -36,19 +36,19 @@ public abstract class BankAccount {
         this.accountOpenedOn = accountOpenedOn;
     }
 
-    long getAccountNumber() {
+    public long getAccountNumber() {
         return this.accountNumber;
     }
 
-    double getBalance() {
+    public double getBalance() {
         return this.balance;
     }
 
-    double getInterestRate() {
+    public double getInterestRate() {
         return interestRate;
     }
 
-    Date getOpenedOn() {
+    public Date getOpenedOn() {
         return this.accountOpenedOn;
     }
 

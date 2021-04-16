@@ -7,8 +7,8 @@ public class SavingsAccount extends BankAccount {
 
     private static final double INTEREST_RATE = 0.01;
 
-    SavingsAccount(double openingBalance) {
-        super(openingBalance, INTEREST_RATE, new java.util.Date());
+    SavingsAccount(double balance) {
+        super(balance, INTEREST_RATE, new java.util.Date());
     }
 
     SavingsAccount(long accountNumber, double balance, double interestRate, Date accountOpenedOn) {
