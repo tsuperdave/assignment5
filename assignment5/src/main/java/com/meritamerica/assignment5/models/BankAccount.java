@@ -9,31 +9,25 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public abstract class BankAccount {
 
     private List<Transaction> listOfTransactions = new ArrayList<Transaction>();
-    Date accountOpenedOn;
-    protected Date openDate;
+    protected Date openedOn;
+    //protected Date openDate;
     protected long accountNumber;
     protected double balance;
     protected double interestRate;
-    
-    BankAccount() {
-    	this.listOfTransactions = new ArrayList<>();
-    	this.openDate = new Date();
-    	this.accountNumber = MeritBank.getNextAccountNumber();
-    }
 
-    BankAccount(double balance, double interestRate) {
+    public BankAccount(double balance, double interestRate) {
         this(MeritBank.getNextAccountNumber(), balance, interestRate, new Date());
     }
 
-    BankAccount(double balance, double interestRate, Date accountOpenedOn) {
+    public BankAccount(double balance, double interestRate, Date accountOpenedOn) {
         this(MeritBank.getNextAccountNumber(), balance, interestRate, accountOpenedOn);
     }
 
-    BankAccount(long accountNumber, double balance, double interestRate, Date accountOpenedOn) {
+    protected BankAccount(long accountNumber, double balance, double interestRate, Date accountOpenedOn) {
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.interestRate = interestRate;
-        this.accountOpenedOn = accountOpenedOn;
+        this.openedOn = accountOpenedOn;
     }
 
     public long getAccountNumber() {
@@ -49,7 +43,7 @@ public abstract class BankAccount {
     }
 
     public Date getOpenedOn() {
-        return this.accountOpenedOn;
+        return this.openedOn;
     }
 
     public double futureValue(int years) {
@@ -94,8 +88,8 @@ public abstract class BankAccount {
 //    }
     
 
-    String writeToString() {
-        String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(this.accountOpenedOn);
+    public String writeToString() {
+        String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(this.openedOn);
         String[] newStr = {String.valueOf(this.accountNumber), String.valueOf(this.balance), String.format("%.4f", this.interestRate), formattedDate};
         return String.join(",", newStr);
     }

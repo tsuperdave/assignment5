@@ -7,15 +7,15 @@ public class SavingsAccount extends BankAccount {
 
     private static final double INTEREST_RATE = 0.01;
 
-    SavingsAccount() {
-        super(0, INTEREST_RATE);
+    public SavingsAccount() {
+        super(0, SavingsAccount.INTEREST_RATE);
     }
     
-    SavingsAccount(double balance) {
+    public SavingsAccount(double balance) {
         super(MeritBank.getNextAccountNumber(), balance, INTEREST_RATE, new Date());
     }
 
-    SavingsAccount(long accountNumber, double balance, double interestRate, Date accountOpenedOn) {
+    private SavingsAccount(long accountNumber, double balance, double interestRate, Date accountOpenedOn) {
         super(accountNumber, balance, interestRate, accountOpenedOn);
     }
 

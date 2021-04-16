@@ -6,7 +6,7 @@ public class AccountHolder implements Comparable<AccountHolder> {
 	
     private static final double BALANCE_LIMIT = 250000;
     final double FRAUD_THRESHOLD = 1000;
-    private static long ID = 1;
+    private static long ID = 0;
     
     private long id;
     @NotBlank(message = "First name cannot be empty")
@@ -21,15 +21,15 @@ public class AccountHolder implements Comparable<AccountHolder> {
     private SavingsAccount[] savingsAccountList = new SavingsAccount[0];
     private CDAccount[] cdAccountList = new CDAccount[0];
 
-    AccountHolder() { 	
-    	this.id = AccountHolder.ID;
-    	AccountHolder.ID++;
-        this.checkingAccountList = new CheckingAccount[0];
-        this.savingsAccountList = new SavingsAccount[0];
-        this.cdAccountList = new CDAccount[0];
+    public AccountHolder() { 	
+    	this.id = ++AccountHolder.ID;
+    	this.setFirstName("");
+    	this.setMiddleName("");
+    	this.setLastName("");
+    	this.setSSN("");
     }
 
-    AccountHolder(String firstName, String middleName, String lastName, String ssn) {
+    public AccountHolder(String firstName, String middleName, String lastName, String ssn) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;

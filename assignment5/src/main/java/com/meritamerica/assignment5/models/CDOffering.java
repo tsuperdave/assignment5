@@ -9,6 +9,11 @@ public class CDOffering
     protected int term;
     protected double interestRate;
     
+    public CDOffering() {
+    	this.term = 0;
+    	this.interestRate = 0;
+    }
+    
     public CDOffering(int term, double interestRate) {
     	// this.offerId = nextOfferId++;
         this.term = term;

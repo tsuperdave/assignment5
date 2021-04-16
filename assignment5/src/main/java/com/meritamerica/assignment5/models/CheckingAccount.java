@@ -7,19 +7,19 @@ public class CheckingAccount extends BankAccount {
 	
     private static final double INTEREST_RATE = 0.0001;
     
-    CheckingAccount() {
-    	super(0, INTEREST_RATE);
+    public CheckingAccount() {
+    	super(0, CheckingAccount.INTEREST_RATE);
     }
    
-    CheckingAccount(double balance) {
+    public CheckingAccount(double balance) {
         super(MeritBank.getNextAccountNumber(), balance, INTEREST_RATE, new Date());
     }
     
-    CheckingAccount(double balance, double interestRate) {
+    public CheckingAccount(double balance, double interestRate) {
     	super(balance, interestRate);
     }
     
-    CheckingAccount(long accountNumber, double balance, double interestRate, Date accountOpenedOn) {
+    private CheckingAccount(long accountNumber, double balance, double interestRate, Date accountOpenedOn) {
         super(accountNumber, balance, interestRate, accountOpenedOn);
     }
 
