@@ -10,7 +10,6 @@ public abstract class BankAccount {
 
     private List<Transaction> listOfTransactions = new ArrayList<Transaction>();
     protected Date openedOn;
-    //protected Date openDate;
     protected long accountNumber;
     protected double balance;
     protected double interestRate;

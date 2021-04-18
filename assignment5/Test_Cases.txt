@@ -1,0 +1,90 @@
+POST /CDOfferings
+  {
+    "term": 5,
+    "interestRate": 0.025
+  }
+  {
+    "term": 5
+  }
+  {
+    "inerestRate": 0.025
+  }
+  {
+    "term": 0,
+    "interestRate": 0.025
+  }
+  {
+    "term": 5,
+    "interestRate": 0
+  }
+
+POST /AccountHolder
+  {
+    "firstName": "Sadiq",
+    "middleName": "",
+    "lastName": "Manji",
+    "ssn": "123456789"
+  }
+  {
+    "middleName": "",
+    "lastName": "Manji",
+    "ssn": "123456789"
+  }
+  {
+    "firstName": "Sadiq",
+    "middleName": "",
+    "ssn": "123456789"
+  }
+  {
+    "firstName": "Sadiq",
+    "middleName": "",
+    "lastName": "Manji"
+  }
+
+POST /AccountHolder/{id}/CheckingAccount
+  {
+    "balance": 0
+  }
+  {
+    "balance": 100
+  }
+  {
+    "balance": 1001
+  }
+  {
+    "balance": -200
+  }
+  {
+    "balance": 300000
+  }
+
+POST /AccountHolder/{id}/SavingsAccount
+  {
+    "balance": 0
+  }
+  {
+    "balance": 100
+  }
+  {
+    "balance": 1001
+  }
+  {
+    "balance": -200
+  }
+  {
+    "balance": 300000
+  }
+
+POST /AccountHolder/{id}/CDAccount
+  {
+    "balance": 10000,
+    "cdOffering": { 
+        "id": 1
+        }
+  }
+  {
+    "balance": 100,
+    "cdOffering": {
+        "id": 1
+        }
+  }

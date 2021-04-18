@@ -1,28 +1,27 @@
 package com.meritamerica.assignment5.models;
 
-import javax.validation.constraints.NotNull;
-
 public class CDOffering
 {
-	// protected static int nextOfferId = 0;
-	// protected int offerId;
-    protected int term;
-    protected double interestRate;
+	private static int nextOfferId = 0;
+	private int id;
+    private int term;
+    private double interestRate;
     
     public CDOffering() {
-    	this.term = 0;
-    	this.interestRate = 0;
+    	this.id = ++CDOffering.nextOfferId;
+    	this.term = 5;
+    	this.interestRate = 0.025;
     }
     
     public CDOffering(int term, double interestRate) {
-    	// this.offerId = nextOfferId++;
+    	this.id = ++CDOffering.nextOfferId;
         this.term = term;
         this.interestRate = interestRate;
     }
 
-//    public int getOfferId() {
-//    	return offerId;
-//    }
+    public int getid() {
+    	return this.id;
+    }
     
     public int getTerm() {
         return term;
@@ -32,9 +31,9 @@ public class CDOffering
         return interestRate;
     }
     
-//    public void setOfferId(int offerId) {
-//    	this.offerId = offerId;
-//    }
+    public void setid(int id) {
+    	this.id = id;
+    }
     
     public void setTerm(int term) {
     	this.term = term;

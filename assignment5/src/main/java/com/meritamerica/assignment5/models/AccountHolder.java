@@ -6,9 +6,9 @@ public class AccountHolder implements Comparable<AccountHolder> {
 	
     private static final double BALANCE_LIMIT = 250000;
     final double FRAUD_THRESHOLD = 1000;
-    private static long ID = 0;
+    private static int ID = 0;
     
-    private long id;
+    private int id;
     @NotBlank(message = "First name cannot be empty")
     private String firstName;
     private String middleName;
@@ -72,7 +72,7 @@ public class AccountHolder implements Comparable<AccountHolder> {
     	return id;
     }
     
-    public void setId(long id) {
+    public void setId(int id) {
     	this.id = id;
     }
     
@@ -84,9 +84,10 @@ public class AccountHolder implements Comparable<AccountHolder> {
     public CheckingAccount addCheckingAccount(CheckingAccount checkingAccount) throws ExceedsCombinedBalanceLimitException, ExceedsFraudSuspicionLimitException {
         if ((this.getCheckingBalance() + (this.getCombinedBalance() - this.getCDBalance()) >= BALANCE_LIMIT)) {
             throw new ExceedsCombinedBalanceLimitException("Balance exceeds limit. Unable to open new account at this time");
-        } else if(checkingAccount.getBalance() > FRAUD_THRESHOLD) {
-            throw new ExceedsFraudSuspicionLimitException("Possible fraud detected. Transaction is being sent to fraud detection services for review");
         }
+//        } else if(checkingAccount.getBalance() > FRAUD_THRESHOLD) {
+//            throw new ExceedsFraudSuspicionLimitException("Possible fraud detected. Transaction is being sent to fraud detection services for review");
+//        }
 
         // checkingAccount.addTransaction(new DepositTransaction(checkingAccount, checkingAccount.getBalance()));
 
@@ -129,9 +130,10 @@ public class AccountHolder implements Comparable<AccountHolder> {
     public SavingsAccount addSavingsAccount(SavingsAccount savingsAccount) throws ExceedsCombinedBalanceLimitException, ExceedsFraudSuspicionLimitException {
         if (this.getSavingsBalance() + (this.getCombinedBalance() - this.getCDBalance()) >= BALANCE_LIMIT) {
             throw new ExceedsCombinedBalanceLimitException("Balance exceeds limit. Unable to open new account at this time");
-        } else if(savingsAccount.getBalance() > FRAUD_THRESHOLD){
-            throw new ExceedsFraudSuspicionLimitException("Possible fraud detected. Transaction is being sent to fraud detection services for review");
         }
+//        } else if(savingsAccount.getBalance() > FRAUD_THRESHOLD){
+//            throw new ExceedsFraudSuspicionLimitException("Possible fraud detected. Transaction is being sent to fraud detection services for review");
+//        }
 
         // savingsAccount.addTransaction(new DepositTransaction(savingsAccount, savingsAccount.getBalance()));
 
@@ -171,15 +173,15 @@ public class AccountHolder implements Comparable<AccountHolder> {
     public CDAccount addCDAccount(CDOffering offering, double openingBalance) throws ExceedsFraudSuspicionLimitException, NegativeAmountException {
         if(offering == null) return null;
 
-        CDAccount newCDAccount = new CDAccount(offering, openingBalance);
+        CDAccount newCDAccount = new CDAccount(openingBalance, offering);
         DepositTransaction transaction = new DepositTransaction(newCDAccount, openingBalance);
 
         try {
             MeritBank.processTransaction(transaction);
         }
-        catch (ExceedsFraudSuspicionLimitException e) {
-            throw new ExceedsFraudSuspicionLimitException("Possible fraud detected. Transaction is being sent to fraud detection services for review");
-        }
+//        catch (ExceedsFraudSuspicionLimitException e) {
+//            throw new ExceedsFraudSuspicionLimitException("Possible fraud detected. Transaction is being sent to fraud detection services for review");
+//        }
         catch (NegativeAmountException e) {
             throw new NegativeAmountException("Unable to process request. Transaction amount must be greater than $0");
         }
@@ -201,9 +203,9 @@ public class AccountHolder implements Comparable<AccountHolder> {
         try {
             MeritBank.processTransaction(transaction);
         }
-        catch (ExceedsFraudSuspicionLimitException e) {
-            throw new ExceedsFraudSuspicionLimitException("Possible fraud detected. Transaction is being sent to fraud detection services for review");
-        }
+//        catch (ExceedsFraudSuspicionLimitException e) {
+//            throw new ExceedsFraudSuspicionLimitException("Possible fraud detected. Transaction is being sent to fraud detection services for review");
+//        }
         catch (NegativeAmountException e) {
             throw new NegativeAmountException("Unable to process request. Transaction amount must be greater than $0");
         }

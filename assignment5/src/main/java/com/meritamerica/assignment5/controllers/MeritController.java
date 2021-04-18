@@ -41,9 +41,9 @@ public class MeritController {
 	// TODO complete
 	@PostMapping(value = "/CDOfferings")
 	@ResponseStatus(HttpStatus.CREATED)
-	public CDOffering addCDOfferings(@RequestBody CDOffering offer) throws MissingFieldException {
+	public CDOffering addCDOfferings(@RequestBody @Valid CDOffering offer) throws MissingFieldException {
 		if(offer.getInterestRate() <= 0 || offer.getInterestRate() >= 1 || offer.getTerm() <= 0) {
-			throw new MissingFieldException("ID, Term or Interest Rate not within bounds");
+			throw new MissingFieldException("term or interestRate not within bounds");
 		}
 		MeritBank.setCDOfferings(offer);
 		return offer;
