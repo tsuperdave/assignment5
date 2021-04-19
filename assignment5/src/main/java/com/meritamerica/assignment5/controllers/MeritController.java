@@ -41,13 +41,14 @@ public class MeritController {
 	// TODO complete
 	@PostMapping(value = "/CDOfferings")
 	@ResponseStatus(HttpStatus.CREATED)
-	public CDOffering addCDOfferings(@RequestBody @Valid CDOffering offer) throws MissingFieldException {
-		if(offer.getInterestRate() <= 0 || offer.getInterestRate() >= 1 || offer.getTerm() <= 0) {
-			throw new MissingFieldException("term or interestRate not within bounds");
-		}
+	public CDOffering addCDOfferings(@RequestBody @Valid CDOffering offer) {
+//		if(offer.getInterestRate() <= 0 || offer.getInterestRate() >= 1 || offer.getTerm() <= 0) {
+//			throw new MissingFieldException("term or interestRate not within bounds");
+//		}
 		MeritBank.setCDOfferings(offer);
 		return offer;
 	}
+	
 	// TODO complete
 	@GetMapping(value = "/CDOfferings")
 	public CDOffering[] getCDOfferings() {
@@ -64,11 +65,13 @@ public class MeritController {
 		MeritBank.addAccountHolder(accountHolder);
 		return accountHolder;
 	}
+	
 	// TODO complete
 	@GetMapping(value = "/AccountHolder")
 	public AccountHolder[] getListOfAccountHolders() {
 		return MeritBank.getAccountHolders();
 	}
+	
 	// TODO complete
 	@GetMapping(value = "/AccountHolder/{id}")
 	public AccountHolder getAccountHolderById(@PathVariable("id") long id) throws NotFoundException {
@@ -90,6 +93,7 @@ public class MeritController {
 		ah.addCheckingAccount(checkingAccount);
 		return checkingAccount;
 	}
+	
 	// TODO complete
 	@GetMapping(value = "/AccountHolder/{id}/CheckingAccount")
 	public CheckingAccount[] getAccountHolderCheckingAccounts(@PathVariable("id") long id) throws NotFoundException {
@@ -107,6 +111,7 @@ public class MeritController {
 		ah.addSavingsAccount(savingsAccount);
 		return savingsAccount;
 	}
+	
 	// TODO complete
 	@GetMapping(value = "/AccountHolder/{id}/SavingsAccount")
 	public SavingsAccount[] getAccountHolderSavingsAccounts(@PathVariable("id") long id) throws NotFoundException {
@@ -124,6 +129,7 @@ public class MeritController {
 		ah.addCDAccount(cdAccount);
 		return cdAccount;
 	}
+	
 	// TODO work on getting savings accounts
 	@GetMapping(value = "/AccountHolder/{id}/CDAccount")
 	public CDAccount[] getAccountHolderCDAccounts(@PathVariable("id") long id) throws NotFoundException {

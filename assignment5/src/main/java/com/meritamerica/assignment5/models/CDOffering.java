@@ -1,16 +1,26 @@
 package com.meritamerica.assignment5.models;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Positive;
+
 public class CDOffering
 {
 	private static int nextOfferId = 0;
+	
 	private int id;
+	
+	@Min(value = 1, message = "term must be greater than 1.")
     private int term;
+	
+    @Positive(message = "interestRate must be greater than 0.")
+    @Max(value = 1, message = "interestRate must be less than 1.")
     private double interestRate;
     
     public CDOffering() {
     	this.id = ++CDOffering.nextOfferId;
-    	this.term = 5;
-    	this.interestRate = 0.025;
+    	//this.term = 5;
+    	//this.interestRate = 0.025;
     }
     
     public CDOffering(int term, double interestRate) {
@@ -19,7 +29,7 @@ public class CDOffering
         this.interestRate = interestRate;
     }
 
-    public int getid() {
+    public int getId() {
     	return this.id;
     }
     
@@ -31,7 +41,7 @@ public class CDOffering
         return interestRate;
     }
     
-    public void setid(int id) {
+    public void setId(int id) {
     	this.id = id;
     }
     
